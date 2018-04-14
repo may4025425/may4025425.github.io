@@ -124,6 +124,44 @@ a img {
  <marquee direction ="right" scrollamount ="9.6">
   <h2 class = "orange-text"><br>Now studying in : Fu Jen Catholic University</br> </h2>
  </marquee>
+<script>
+  $(document).ready(function() {
+    $("Name：").css("color", "orange");
+    $("Email :").prop("disabled", true);
+    $("#Now studying in :").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
+    $("#right-well").children().css("color", "orange");
+    $("#left-well").children().css("color", "green");
+    $(".target:nth-child(2)").addClass("animated bounce");
+    $(".target:even").addClass("animated shake");
+  });
+</script>
+
+<!-- Only change code above this line. -->
+
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well">
+        <button class="btn btn-default target" id="Name：">#Name：</button>
+        <button class="btn btn-default target" id="Email :">#Email :</button>
+        <button class="btn btn-default target" id="Now studying in">#Now studying in</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        <button class="btn btn-default target" id="竺佩蓁">#竺佩蓁</button>
+        <button class="btn btn-default target" id="may4025425@gmail.com">#may4025425@gmail.com</button>
+        <button class="btn btn-default target" id="Fu Jen Catholic University">#Fu Jen Catholic University</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <h2 class="white-text">My Favorite Singer - Charlie Puth</h2>
 
