@@ -1,35 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-<script>
-    $(function(){
-	var $block = $('#abgne-block-photo'),
-		$ul = $(block).find('ul'),
-		$li = $(ul).find('li'),
-		_width = $(li).find('a').width(),
-		_left = $(block).offset().left,
-		_ulWidth = _width * ($(li).length - 1),
-		_animateSpeed = 400,
-		_deviation = 50;	
- 
-	
-   $(ul).width(_width * ($li.length + 1));
- 
-	
-   $(block).mousemove(function(e){
-		
-		var _dis = Math.floor((_left - e.pageX + _deviation) * _ulWidth / (_width - _deviation * 2));
- 
-   $(ul.stop(false, true)).animate({
-	left: _dis < _ulWidth * -1 ? _ulWidth * -1 : _dis < 0 ? _dis : 0}, _animateSpeed);}).find('a').focus(function(){
-	this.blur();
-	});
-});
-    $(document).ready(function() {
-    $("button").addClass("animated bounce");
-    $(".well").addClass("animated shake");};
-</script> 
-  
  
 <style>
   .white-text {
@@ -74,37 +45,6 @@
       width: 500px;
   
   }
- ul, li {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
- 
-a img {
-	border: none;
-}
- 
-#abgne-block-photo {
-	overflow: hidden;
-	position: relative;
-	width: 720px;	
-	height: 520px;	
-	border: 1px solid #ccc;
-}
- 
-#abgne-block-photo ul {
-	width: 99999px;
-	position: absolute;
-}
- 
-#abgne-block-photo ul li {
-	float: left;
-}
- 
-#abgne-block-photo ul li a {
-	display: block;
-	width: 720px;	
-	  }
 </style>
 ul.playlist {
 	margin: 0;
@@ -224,16 +164,15 @@ $(function(){
       <div class="well" id="left-well">
         <button class="btn btn-default target" id=" We Don't Talk Anymore"><a href="https://www.youtube.com/watch?v=3AtDnEC4zak&index=2&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO">We Don't Talk Anymore</button>
         <button class="btn btn-default target" id="Attention"><a href="https://www.youtube.com/watch?v=nfs8NYg7yQM&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=1">Attention</button>
-        <button class="btn btn-default target" id="One Call Away"><a href="https://www.youtube.com/watch?v=CwfoyVa980U&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=3">One Call Away</button>
-        <button class="btn btn-default target" id="Marvin Gaye"><a href="https://www.youtube.com/watch?v=BxuY9FET9Y4&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=4">Marvin Gaye</button>
+        <button class="btn btn-default target" id="How Long"><a href="https://www.youtube.com/watch?v=CwfoyVa980U&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=3">How Long</button>
+        <button class="btn btn-default target" id="One Call Away"><a href="https://www.youtube.com/watch?v=BxuY9FET9Y4&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=4">One Call Away</button>
 	<button class="btn btn-default target" id="If You Leave Me Now"><a href="https://www.youtube.com/watch?v=mBrdEYW0Vno&index=7&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO">If You Leave Me Now</button>
       </div>
     </div>
   </div>
 </div>
- 
 
-<body>
+
 	<div class="tv">
 		<div class="video"></div>
 		<ul class="playlist">
@@ -247,7 +186,7 @@ $(function(){
 			<li><a href="http://www.youtube.com/watch?v=LwfZl1t-dQI">暮光之城MV - Time Will Tell</a></li>
 		</ul>
 	</div>
-</body>
+
 
  </body>
 </html>
