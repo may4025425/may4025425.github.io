@@ -5,28 +5,25 @@
     $(function(){
 	
 	var $block = $('#abgne-block-photo'),
-		$ul = $block.find('ul'),
-		$li = $ul.find('li'),
-		_width = $li.find('a').width(),
-		_left = $block.offset().left,
-		_ulWidth = _width * ($li.length - 1),
+		$ul = $(block).find('ul'),
+		$li = $(ul).find('li'),
+		_width = $(li).find('a').width(),
+		_left = $(block).offset().left,
+		_ulWidth = _width * ($(li).length - 1),
 		_animateSpeed = 400,
 		_deviation = 50;	
  
 	
-	$ul.width(_width * ($li.length + 1));
+   $(ul).width(_width * ($li.length + 1));
  
 	
-	$block.mousemove(function(e){
+   $(block).mousemove(function(e){
 		
 		var _dis = Math.floor((_left - e.pageX + _deviation) * _ulWidth / (_width - _deviation * 2));
  
-		
-		$ul.stop(false, true).animate({
-			left: _dis < _ulWidth * -1 ? _ulWidth * -1 : _dis < 0 ? _dis : 0
-		}, _animateSpeed);
-	}).find('a').focus(function(){
-		this.blur();
+   $(ul.stop(false, true)).animate({
+	left: _dis < _ulWidth * -1 ? _ulWidth * -1 : _dis < 0 ? _dis : 0}, _animateSpeed);}).find('a').focus(function(){
+	this.blur();
 	});
 });
     $(document).ready(function() {
@@ -123,7 +120,6 @@ a img {
   <h3 class="text-primary text-center">Personal Page</h3>
   <div class="row">
     <div class="col-xs-3">
-      <h4>#left-well</h4>
       <div class="well" id="left-well">
         <button class="btn btn-default target" id="Name：竺佩蓁"><a href="https://github.com/may4025425">Name：竺佩蓁</button>
         <button class="btn btn-default target" id="Email :may4025425@gmail.com"><a href="https://www.google.com.tw">Email :may4025425@gmail.com</button>
@@ -133,35 +129,17 @@ a img {
   </div>
 </div>
 
-
-
-  
-
 <h2 class="white-text">My Favorite Singer - Charlie Puth</h2>
-
-
 <div id="abgne-block-photo">
 		<ul>
 			<li><a href="#"><img src="https://scontent.ftpe7-3.fna.fbcdn.net/v/t31.0-8/23668897_10155957902814433_5283118067582356167_o.jpg?_nc_fx=ftpe7-3&oh=d368ce9a5f08f6f72bfe3429197f021e&oe=5B40B35F" /></a></li>
 			<li><a href="#"><img src="https://scontent.ftpe7-2.fna.fbcdn.net/v/t31.0-8/1524295_10153103297514433_3544985540189481405_o.jpg?_nc_fx=ftpe7-3&oh=a411b237d804b43ca02f547cac479955&oe=5B42B6D7" /></a></li>
-			
-			
 		</ul>
-</div>
-
-
-
-  
-
-
-  <p class="orange-text">
-    Introduction<br>查爾斯·奧托·普斯（Charles Otto Puth Jr.），1991年12月2日出生，美國流行歌手。</br><br>2015年，憑藉與梅根·崔娜合作的《馬文蓋》（Marvin Gaye）被大家所知，並迅速走紅。又因為其與威茲·哈利法合作演唱的《玩命關頭7》電影片尾曲《再見你一面》（See You Again），而奪得美國告示牌百強單曲榜總計非連續12週冠軍。</br><br>2016年1月，與席琳娜·戈梅茲合作的《不再甜蜜》（We Don't Talk Anymore）更突破他在YouTube上以往的點擊率十一億點擊率。</br><br>2017年4月，查理·普斯釋出《注意力》（Attention ），僅僅幾天就登上了告示牌百強單曲榜前十。</br>
-      
-  </p>
+ </div>
+<p class="orange-text">
+    Introduction<br>查爾斯·奧托·普斯（Charles Otto Puth Jr.），1991年12月2日出生，美國流行歌手。</br><br>2015年，憑藉與梅根·崔娜合作的《馬文蓋》（Marvin Gaye）被大家所知，並迅速走紅。又因為其與威茲·哈利法合作演唱的《玩命關頭7》電影片尾曲《再見你一面》（See You Again），而奪得美國告示牌百強單曲榜總計非連續12週冠軍。</br><br>2016年1月，與席琳娜·戈梅茲合作的《不再甜蜜》（We Don't Talk Anymore）更突破他在YouTube上以往的點擊率十一億點擊率。</br><br>2017年4月，查理·普斯釋出《注意力》（Attention ），僅僅幾天就登上了告示牌百強單曲榜前十。</br>  
+ </p>
   <h2 class = "white-text">Charlie Puth Songs:</h2>
-
-
-
   <ol>
     <li class ="orange-text"> <a href="https://www.youtube.com/watch?v=3AtDnEC4zak&index=2&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO"> We Don't Talk Anymore (feat. Selena Gomez) </a> </li>
     <li class ="orange-text"> <a href="https://www.youtube.com/watch?v=nfs8NYg7yQM&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=1"> Attention </a></li>
@@ -172,9 +150,6 @@ a img {
   </ol>
   
  </body>
-
-
-
 </html>
 
 
