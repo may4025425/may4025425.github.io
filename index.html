@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 
 <head>
 <style>
@@ -47,132 +47,6 @@
   }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<title>自製 YouTube 影片播放清單-Ghost</title>
-
-
-<style type="text/css">
-ul.playlist {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	width: 260px;
-	float: left;
-}
-ul.playlist li {
-	margin: 0 20px;
-	float: left;
-}
-ul.playlist li a img {
-	border: 0;
-	vertical-align: middle;
-}
-.tv {
-	background: #666;
-	padding: 10px;
-	width: 740px;
-	height: 360px;
-}
-
-.video {
-	margin: 0px auto;
-	width: 510px;
-	height: 300px;
-}
-</style>
-<script type="text/javascript">
-	$(function(){
-		var thumbSize = 'large',			// 設定要取得的縮圖是大圖還是小圖
-											// 大圖寬高為 480X360；小圖寬高為 120X90
-			imgWidth = '275',				// 限制圖片的寬
-			imgHeight = '195',				// 限制圖片的高
-			swfWidth = '510',				// 指定 YouTube 影片的寬
-			swfHeight = '300',				// 指定 YouTube 影片的高
-			autoPlay = '&autoplay=0',		// 是否載入 YouTube 影片後自動播放；若不要自動播放則設成 0
-			fullScreen = '&fs=1',			// 是否允許播放 YouTube 影片時能全螢幕播放
-			$video = $('.video'),			// 用來放置 Youtube 影片的區塊
-			
-			_speed = 600;					// 縮圖移動到 $video 區塊的速度
-		
-		var _first = true;
-
-		$('.playlist>li>a').each(function(){
-			// 取得要連結轉換的網址及訊息內容
-			var _this =  $(this),
-				_url = _this.attr('href'),
-				_info = _this.text(),
-				_type = (thumbSize == 'large') ? 0 : 2;
-			
-			// 取得 vid
-			var vid = _url.match('[\\?&]v=([^&#]*)')[1];
-
-			// 取得縮圖
-			var thumbUrl = "http://img.youtube.com/vi/"+vid+"/" + _type + ".jpg";
-			
-			// 把目前超連結的內容轉換成圖片並加入 click 事件
-			_this.html('<img src="'+thumbUrl+'" alt="'+_info+'" title="'+_info+'" width="'+imgWidth+'" height="'+imgHeight+'" />').click(function(){
-				return false;
-			}).focus(function(){
-				this.blur();
-			}).children('img').click(function(){
-				var $this = $(this), 
-					_offset = $this.offset();
-				
-				if(_first){
-					$video.html(showYoutube(vid));
-					return (_first = false);
-				}
-	                 _videoOffset = $video.offset(),	// 取得 $video 區塊的座標
-				var $clone = $this.clone().appendTo('body')
-				$clone.css({
-					position: 'absolute', 
-					top: _offset.top,
-					left: _offset.left
-				}).animate({
-					top: _videoOffset.top,
-					left: _videoOffset.left,
-					width: $video.width(),
-					height: $video.height()
-				}, _speed, function(){
-					// 當點擊到圖片時就轉換成 YouTube 影片
-					$video.html(showYoutube(vid));
-					$clone.fadeOut(function(){
-						$(this).remove();
-					});
-				});
-				
-				return false;
-			});
-		});
-
-		function showYoutube(vid){
-			// 當點擊到圖片時就轉換成 YouTube 影片
-			var swf  = '<object width="'+swfWidth+'" height="'+swfHeight+'">';
-			swf += '<param name="movie" value="http://www.youtube.com/v/'+vid+autoPlay+fullScreen+'"></param>';
-			swf += '<param name="wmode" value="transparent"></param>';
-			swf += (fullScreen == '&fs=1') ? '<param name="allowfullscreen" value="true"></param>' : '';
-						
-			swf += '<embed type="application/x-shockwave-flash" src="http://www.youtube.com/v/'+vid+autoPlay+fullScreen+'" ';
-			swf += (fullScreen == '&fs=1') ? 'allowfullscreen="true" ' : '';
-			swf += 'wmode="transparent" width="'+swfWidth+'" height="'+swfHeight+'"></embed>';
-
-			swf += '</object/>';
-						
-			return swf;
-		}
-
-		// 先載入第一個影片
-		$('.playlist>li>a').eq(0).children('img').click();
-
-		// 變更影片播放為自動播放
-		autoPlay = '&autoplay=1';
-	});
-</script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<link href="index.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="jquery-1.6.min.js"></script>
-<script type="text/javascript" src="jquery-ui-1.8.17.custom.min.js"></script>
-<script type="text/javascript" src="001.js"></script>
 
 </head>
 	
@@ -230,27 +104,7 @@ ul.playlist li a img {
    </td>
   </tr>
 </table>
-	
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<div id="MENU">
-<ul>
-  <li class="We Don't Talk Anymore" style="margin-top: 100px;"><a href="https://www.youtube.com/watch?v=3AtDnEC4zak&index=2&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO">We Don't Talk Anymore</a></li>
-  <li class="Attention" style="margin-top: 100px;"><a href="https://www.youtube.com/watch?v=nfs8NYg7yQM&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=1">Attention</a></li>
-  <li class="How Long" style="margin-top: 100px;"><a href="https://www.youtube.com/watch?v=CwfoyVa980U&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=3">How Long</a></li>
-  <li class="One Call Away" style="margin-top: 100px;"><a href="https://www.youtube.com/watch?v=BxuY9FET9Y4&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=4">One Call Away</a></li>
-  <li class="If You Leave Me Now" style="margin-top: 100px;"><a href="https://www.youtube.com/watch?v=mBrdEYW0Vno&index=7&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO">If You Leave Me Now</a></li>
-  <li class="Marvin Gaye" style="margin-top: 100px;"><a href="https://www.youtube.com/watch?v=igNVdlXhKcI&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=6">Marvin Gaye</a>
-  </li>
-</ul>
-
 </div>
-
-
-
 
  </body>
 </html>
