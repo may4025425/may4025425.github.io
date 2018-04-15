@@ -1,7 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <link href="https://fonts.gdgdocs.org/css?family=Lobster" rel="stylesheet" type="text/css">
+<script>
+    $(function(){
+	
+	var $block = $('#abgne-block-photo'),
+		$ul = $block.find('ul'),
+		$li = $ul.find('li'),
+		_width = $li.find('a').width(),
+		_left = $block.offset().left,
+		_ulWidth = _width * ($li.length - 1),
+		_animateSpeed = 400,
+		_deviation = 50;	
+ 
+	
+	$ul.width(_width * ($li.length + 1));
+ 
+	
+	$block.mousemove(function(e){
+		
+		var _dis = Math.floor((_left - e.pageX + _deviation) * _ulWidth / (_width - _deviation * 2));
+ 
+		
+		$ul.stop(false, true).animate({
+			left: _dis < _ulWidth * -1 ? _ulWidth * -1 : _dis < 0 ? _dis : 0
+		}, _animateSpeed);
+	}).find('a').focus(function(){
+		this.blur();
+	});
+});
+</script> 
+  
+ 
 <style>
   .white-text {
     color: white;
@@ -77,6 +107,7 @@ a img {
 	width: 720px;	
 	  }
 </style>
+	  
 </head>
 	
 <body  background="https://images.unsplash.com/photo-1502581827181-9cf3c3ee0106?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=52a5727927ab1ffdbfcdfe5800b82aa7&auto=format&fit=crop&w=2821&q=80">
@@ -93,17 +124,17 @@ a img {
     <div class="col-xs-6">
       <h4>#left-well</h4>
       <div class="well" id="left-well">
-        <button class="btn btn-default target" id="Name：">#Name：</button>
-        <button class="btn btn-default target" id="Email :">#Email :</button>
-        <button class="btn btn-default target" id="Now studying in">#Now studying in</button>
+        <button class="btn btn-default target" id="Name：">Name：</button>
+        <button class="btn btn-default target" id="Email :">Email :</button>
+        <button class="btn btn-default target" id="Now studying in">Now studying in</button>
       </div>
     </div>
     <div class="col-xs-6">
       <h4>#right-well</h4>
       <div class="well" id="right-well">
-        <button class="btn btn-default target" id="竺佩蓁">#竺佩蓁</button>
-        <button class="btn btn-default target" id="may4025425@gmail.com">#may4025425@gmail.com</button>
-        <button class="btn btn-default target" id="Fu Jen Catholic University">#Fu Jen Catholic University</button>
+        <button class="btn btn-default target" id="竺佩蓁">竺佩蓁</button>
+        <button class="btn btn-default target" id="may4025425@gmail.com">may4025425@gmail.com</button>
+        <button class="btn btn-default target" id="Fu Jen Catholic University">Fu Jen Catholic University</button>
       </div>
     </div>
   </div>
@@ -129,36 +160,7 @@ a img {
 			
 		</ul>
 </div>
-<script>
-    $(function(){
-	
-	var $block = $('#abgne-block-photo'),
-		$ul = $block.find('ul'),
-		$li = $ul.find('li'),
-		_width = $li.find('a').width(),
-		_left = $block.offset().left,
-		_ulWidth = _width * ($li.length - 1),
-		_animateSpeed = 400,
-		_deviation = 50;	
- 
-	
-	$ul.width(_width * ($li.length + 1));
- 
-	
-	$block.mousemove(function(e){
-		
-		var _dis = Math.floor((_left - e.pageX + _deviation) * _ulWidth / (_width - _deviation * 2));
- 
-		
-		$ul.stop(false, true).animate({
-			left: _dis < _ulWidth * -1 ? _ulWidth * -1 : _dis < 0 ? _dis : 0
-		}, _animateSpeed);
-	}).find('a').focus(function(){
-		this.blur();
-	});
-});
-</script> 
-  
+
 
 
   
@@ -169,6 +171,30 @@ a img {
       
   </p>
   <h2 class = "white-text">Charlie Puth Songs:</h2>
+
+
+
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well">
+        <button class="btn btn-default target" id="Name：竺佩蓁">Name：竺佩蓁</button>
+        <button class="btn btn-default target" id="Email :">Email :</button>
+        <button class="btn btn-default target" id="Now studying in">Now studying in</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        <button class="btn btn-default target" id=""></button>
+        <button class="btn btn-default target" id="may4025425@gmail.com">may4025425@gmail.com</button>
+        <button class="btn btn-default target" id="Fu Jen Catholic University">Fu Jen Catholic University</button>
+      </div>
+    </div>
+  </div>
+</div>
   <ol>
     <li class ="orange-text"> <a href="https://www.youtube.com/watch?v=3AtDnEC4zak&index=2&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO"> We Don't Talk Anymore (feat. Selena Gomez) </a> </li>
     <li class ="orange-text"> <a href="https://www.youtube.com/watch?v=nfs8NYg7yQM&list=PLyUT0JApKHiPob4_PkY55yp4C5weNmLYO&index=1"> Attention </a></li>
