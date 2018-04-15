@@ -46,6 +46,11 @@
   
   }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<title>自製 YouTube 影片播放清單-Ghost</title>
+
+
+<style type="text/css">
 ul.playlist {
 	margin: 0;
 	padding: 0;
@@ -54,77 +59,115 @@ ul.playlist {
 	float: left;
 }
 ul.playlist li {
-	margin: 0 3px;
+	margin: 0 20px;
 	float: left;
 }
 ul.playlist li a img {
 	border: 0;
 	vertical-align: middle;
 }
- 
 .tv {
 	background: #666;
 	padding: 10px;
 	width: 740px;
 	height: 360px;
 }
+
 .video {
-	float: left;
-	width: 480px;
-	height: 360px;
+	margin: 0px auto;
+	width: 510px;
+	height: 300px;
 }
-$(function(){
-	var thumbSize = 'large',		// 設定要取得的縮圖是大圖還是小圖
-						// 大圖寬高為 480X360；小圖寬高為 120X90
-		imgWidth = '120',		// 限制圖片的寬
-		imgHeight = '90',		// 限制圖片的高
-		swfWidth = '480',		// 指定 YouTube 影片的寬
-		swfHeight = '360',		// 指定 YouTube 影片的高
-		autoPlay = '&autoplay=0',	// 是否載入 YouTube 影片後自動播放；若不要自動播放則設成 0
-		fullScreen = '&fs=1';		// 是否允許播放 YouTube 影片時能全螢幕播放
- 
-	$('.playlist>li>a').each(function(){
-		// 取得要連結轉換的網址及訊息內容
-		var _this =  $(this),
-			_url = _this.attr('href'),
-			_info = _this.text(),
-			_type = (thumbSize == 'large') ? 0 : 2;
- 
-		// 取得 vid
-		var vid = _url.match('[\\?&]v=([^&#]*)')[1];
- 
-		// 取得縮圖
-		var thumbUrl = "http://img.youtube.com/vi/"+vid+"/" + _type + ".jpg";
- 
-		// 把目前超連結的內容轉換成圖片並加入 click 事件
-		_this.html('<img src="'+thumbUrl+'" alt="'+_info+'" title="'+_info+'" width="'+imgWidth+'" height="'+imgHeight+'" />').click(function(){
-			return false;
-		}).focus(function(){
-			this.blur();
-		}).children('img').click(function(){
+</style>
+<script type="text/javascript">
+	$(function(){
+		var thumbSize = 'large',			// 設定要取得的縮圖是大圖還是小圖
+											// 大圖寬高為 480X360；小圖寬高為 120X90
+			imgWidth = '275',				// 限制圖片的寬
+			imgHeight = '195',				// 限制圖片的高
+			swfWidth = '510',				// 指定 YouTube 影片的寬
+			swfHeight = '300',				// 指定 YouTube 影片的高
+			autoPlay = '&autoplay=0',		// 是否載入 YouTube 影片後自動播放；若不要自動播放則設成 0
+			fullScreen = '&fs=1',			// 是否允許播放 YouTube 影片時能全螢幕播放
+			$video = $('.video'),			// 用來放置 Youtube 影片的區塊
+			
+			_speed = 600;					// 縮圖移動到 $video 區塊的速度
+		
+		var _first = true;
+
+		$('.playlist>li>a').each(function(){
+			// 取得要連結轉換的網址及訊息內容
+			var _this =  $(this),
+				_url = _this.attr('href'),
+				_info = _this.text(),
+				_type = (thumbSize == 'large') ? 0 : 2;
+			
+			// 取得 vid
+			var vid = _url.match('[\\?&]v=([^&#]*)')[1];
+
+			// 取得縮圖
+			var thumbUrl = "http://img.youtube.com/vi/"+vid+"/" + _type + ".jpg";
+			
+			// 把目前超連結的內容轉換成圖片並加入 click 事件
+			_this.html('<img src="'+thumbUrl+'" alt="'+_info+'" title="'+_info+'" width="'+imgWidth+'" height="'+imgHeight+'" />').click(function(){
+				return false;
+			}).focus(function(){
+				this.blur();
+			}).children('img').click(function(){
+				var $this = $(this), 
+					_offset = $this.offset();
+				
+				if(_first){
+					$video.html(showYoutube(vid));
+					return (_first = false);
+				}
+	                 _videoOffset = $video.offset(),	// 取得 $video 區塊的座標
+				var $clone = $this.clone().appendTo('body')
+				$clone.css({
+					position: 'absolute', 
+					top: _offset.top,
+					left: _offset.left
+				}).animate({
+					top: _videoOffset.top,
+					left: _videoOffset.left,
+					width: $video.width(),
+					height: $video.height()
+				}, _speed, function(){
+					// 當點擊到圖片時就轉換成 YouTube 影片
+					$video.html(showYoutube(vid));
+					$clone.fadeOut(function(){
+						$(this).remove();
+					});
+				});
+				
+				return false;
+			});
+		});
+
+		function showYoutube(vid){
 			// 當點擊到圖片時就轉換成 YouTube 影片
 			var swf  = '<object width="'+swfWidth+'" height="'+swfHeight+'">';
 			swf += '<param name="movie" value="http://www.youtube.com/v/'+vid+autoPlay+fullScreen+'"></param>';
 			swf += '<param name="wmode" value="transparent"></param>';
 			swf += (fullScreen == '&fs=1') ? '<param name="allowfullscreen" value="true"></param>' : '';
- 
+						
 			swf += '<embed type="application/x-shockwave-flash" src="http://www.youtube.com/v/'+vid+autoPlay+fullScreen+'" ';
 			swf += (fullScreen == '&fs=1') ? 'allowfullscreen="true" ' : '';
 			swf += 'wmode="transparent" width="'+swfWidth+'" height="'+swfHeight+'"></embed>';
- 
+
 			swf += '</object/>';
- 
-			$('.video').html(swf);
- 
-			return false;
-		});
+						
+			return swf;
+		}
+
+		// 先載入第一個影片
+		$('.playlist>li>a').eq(0).children('img').click();
+
+		// 變更影片播放為自動播放
+		autoPlay = '&autoplay=1';
 	});
- 
-	// 先載入第一個影片
-	$('.playlist>li>a').eq(0).children('img').click();
- 
-	// 變更影片播放為自動播放
-	autoPlay = '&autoplay=1';	  
+</script>
+
 </head>
 	
 <body  background="https://images.unsplash.com/photo-1502581827181-9cf3c3ee0106?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=52a5727927ab1ffdbfcdfe5800b82aa7&auto=format&fit=crop&w=2821&q=80">
@@ -167,22 +210,33 @@ $(function(){
     </div>
   </div>
 </div>
+<table border="1" width="100%" height="100%">
+  <tr>
+   <td>	
+	<ul class="playlist">
+			<li><a href="http://www.youtube.com/watch?v=xLY6EPXdW-0">01</a></li>
+			<li><a href="http://www.youtube.com/watch?v=DAa8m7Rim3g">02</a></li>
+			<li><a href="http://www.youtube.com/watch?v=enECrYUsDzw">03</a></li>
+			<li><a href="https://www.youtube.com/watch?v=bYczfaclWME">04</a></li>
+			</ul>
+   </td>
+   <td width="581">
+				
+    <table border="1" width="100%" height="100%">
+	<tr>
+	 <td>				
 
-
-	<div class="tv">
 		<div class="video"></div>
-		<ul class="playlist">
-			<li><a href="http://www.youtube.com/watch?v=htCW5fcyLUU">暮光之城第三集 蝕預告片</a></li>
-			<li><a href="http://www.youtube.com/watch?v=GeS0gAIg1Io">《暮光之城：新月》預告片</a></li>
-			<li><a href="http://www.youtube.com/watch?v=wngwJ-GEJVg">【暮光之城】中文版預告片</a></li>
-			<li><a href="http://www.youtube.com/watch?v=4VTT3v9TBIo">【暮光之城2:新月】中文版前導預告【雅各篇】</a></li>
-			<li><a href="http://www.youtube.com/watch?v=bwd7BbFWYw0">暮光之城2新月最終版預告</a></li>
-			<li><a href="http://www.youtube.com/watch?v=_kerQfD1LuA">暮光之城新月MTV 預告片New Moon Trailer</a></li>
-			<li><a href="http://www.youtube.com/watch?v=fDhRS8Gd1bA">暮光之城2新月The Twilight Saga: New Moon預告</a></li>
-			<li><a href="http://www.youtube.com/watch?v=LwfZl1t-dQI">暮光之城MV - Time Will Tell</a></li>
-		</ul>
-	</div>
-
+								
+							  </td>
+						</tr>
+					</table>
+				
+				
+				</td>
+			</tr>
+			</table>
+	
 
  </body>
 </html>
